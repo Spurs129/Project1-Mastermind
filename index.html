@@ -7,15 +7,14 @@
     <script src="scripts/app.js" charset="utf-8"></script>
 </head>
 <body>
-  <h1>Visionary's Mastermind</h1>
+  <h1>Mr Visionary's Mastermind</h1>
   <div class='button-wrapper'>
     <button id = 'start'>Start Game</button>
-    <button onclick="window.location.href='https://groupgames101.com/mastermind-game-rules/';" id= 'rules' target='_blank'>Game Rules</button>
+    <a href='https://groupgames101.com/mastermind-game-rules/' target='_blank'>Game Rules</a>
     <input type="checkbox" id="checkbox" name="checkbox" value="checkbox">
-    <label for="checkbox">Allow Duplicates?</label><br>
+    <label for="checkbox">Duplicates Mode</label><br>
   </div>
   <div class = "grid-wrapper">
-   <!-- <h3>Solve this code</h3> -->
     <div class = "grid"></div>
   </div>
   <div class="playerChoiceButtons">
@@ -23,7 +22,7 @@
     <button id="choice2" value='2'>Column 2</button>
     <button id="choice3" value='3'>Column 3</button>
     <button id="choice4" value='4'>Column 4</button>
-    <button id="submit">submit</button>
+    <button id="submit">Submit</button>
   </div>
   <div id="color-buttons"></div>
 </body>
