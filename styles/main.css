@@ -1,0 +1,259 @@
+body {
+  height: 98vh;
+  margin: 0;
+  background-color: lightgray;
+}
+
+
+.grid-wrapper {
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.grid {
+  align-items: center;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 600px;
+  width: 300px;
+}
+
+.grid div {
+  border: 1px solid cornflowerblue;
+  flex-grow: 1;
+  height: 7%;
+  width: 17%;
+  background-color: 'value';
+  border-radius: 30px;
+}
+
+h1{
+  text-align: center;
+}
+.colorGrid {
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 120px;
+  width: 240px;
+}
+
+.colorGrid div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 9%;
+  width: 17%;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start, #rules {
+  height: 50px;
+  font-family: fantasy;
+  color: honeydew;
+  font-size: small;
+  border-radius: 20px;
+  border: 2px solid darkslategrey;
+  text-align: center;
+  margin: 2px 2px;
+  background-color: cornflowerblue;
+  padding: 5px;
+}
+
+#rules {
+  width: 50px;
+  font-size: small;
+}
+#start {
+  width: 200px;
+  margin-left: 150px;
+  font-size: large;
+}
+p {
+  margin-bottom: 4px 0px;
+  padding: 0px;
+}
+
+.colors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#red {
+  background-color: red;
+}
+#green{
+  background-color: greenyellow;
+
+}
+#blue {
+  background-color: blue;
+}
+#yellow {
+  background-color: yellow;
+}
+#black {
+  background-color: black;
+}
+#brown {
+  background-color: brown;
+}
+#white {
+  background-color: white;
+}
+#orange {
+  background-color: orange;
+}
+
+.submit {
+  background-color: blanchedalmond;
+}
+
+.blue {
+  background-color: blue;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.green {
+  background-color: greenyellow;
+}
+.black {
+  background-color: black;
+}
+.white {
+  background-color: white;
+}
+.orange {
+  background-color: orange;
+}
+.brown {
+  background-color: brown;
+}
+.hidden {
+  background-color: honeydew;
+  text-align: center;
+  font-size: x-large;
+  font-family: fantasy;
+  color:cornflowerblue;
+}
+#cell5 {
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border: none;
+  font-family: fantasy;
+  color: cornflowerblue;
+
+}
+.playerChoiceButtons {
+  display: flex;
+  justify-content: center;
+}
+.color-buttons {
+  width: 50px;
+  height: 25px;
+  margin-bottom: 50px;
+  border-radius: 50px;
+}
+
+#submit {
+  color: honeydew;
+  background-color: cornflowerblue;
+  width: 60px;
+  border-radius: 20px;
+  margin-top: 10px;
+  border: 2px solid darkslategrey;
+  font-family: fantasy;
+}
+#color-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+#choice1, #choice2, #choice3, #choice4 {
+  width: 60px;
+  color: cornflowerblue;
+  background-color: honeydew;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-family: fantasy;
+  
+}
+h1 {
+  font-family: fantasy;
+  color: cornflowerblue;
+  margin: 20px 5px 1px 5px;
+}
+.feedback-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#feedback-cell {
+  border-radius: 3px;
+  margin-left: 2px;
+}
+
+.feedback-cell-child {
+  display: inline-block;
+  background-color: wheat;
+}
+#red-peg, #white-peg, #x-peg, #no-peg {
+  display: inline-block;
+   width: 27%;
+   height: 20%;
+   margin: 2px;
+   
+}
+#red-peg {
+  background-color: maroon;
+  
+}
+#white-peg {
+  background-color: mintcream;
+  
+}
+#x-peg {
+  background-color: lightgray;
+}
+#no-pegs {
+  border: none;
+  background-color: lightgray;
+
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+}
+h3 {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-family: fantasy;
+  color: blueviolet;
+}
+label {
+  font-family: fantasy;
+}

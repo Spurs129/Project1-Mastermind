@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GRID GAME!</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/app.js" charset="utf-8"></script>
+</head>
+<body>
+  <h1>Visionary's Mastermind</h1>
+  <div class='button-wrapper'>
+    <button id = 'start'>Start Game</button>
+    <button onclick="window.location.href='https://groupgames101.com/mastermind-game-rules/';" id= 'rules' target='_blank'>Game Rules</button>
+    <input type="checkbox" id="checkbox" name="checkbox" value="checkbox">
+    <label for="checkbox">Allow Duplicates?</label><br>
+  </div>
+  <div class = "grid-wrapper">
+   <!-- <h3>Solve this code</h3> -->
+    <div class = "grid"></div>
+  </div>
+  <div class="playerChoiceButtons">
+    <button id="choice1" value='1'>Column 1</button>
+    <button id="choice2" value='2'>Column 2</button>
+    <button id="choice3" value='3'>Column 3</button>
+    <button id="choice4" value='4'>Column 4</button>
+    <button id="submit">submit</button>
+  </div>
+  <div id="color-buttons"></div>
+</body>
+</html>
