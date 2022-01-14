@@ -51,7 +51,7 @@ function init() {
 
   // 3) function to randomly generate computer choice array for each game. Can be with or without duplicates dependijng on checkbox.
   function getComputerChoice(){
-    const colorArrayCopy = [...colorArray] // creating a copy array so that we can chnage the array in the function, without changing the main array (which will be used later). ... prevents mutation. 
+    const colorArrayCopy = [...colorArray] // creating a copy array so that we can chnage the array in the function, without changing the main array (which will be used later). spread syntax (...) prevents copy chnaging orgional. 
     for (let i = 0; i < 4; i++){ 
       const randomIndex = Math.floor(Math.random() * colorArrayCopy.length) // generates a random number for 0 to 7, and assings it to variable
       computerChoice.push(colorArrayCopy[randomIndex]) // pushes a random color into the copy array. 
@@ -69,7 +69,7 @@ function init() {
     return computerChoice
   }  
   getComputerChoice()
-  console.log(computerChoice)
+  
 
 
   // 4) create start game function. When start game button  clicked, this resets the board and generates new computer code. 
@@ -121,11 +121,10 @@ function init() {
     const blank = playerChoice.some(blank => blank === 'x') //assign variable blank to check if the player has chosen 4 colors.
     if (blank === true) { // if player has not chosen 4 colors, we alert them to chose 4 colors, and exit function. 
       alert('Please select 4 colours')
-      currentColor = 'x' // hard coding to remove bug
     } else if (JSON.stringify(playerChoice) === JSON.stringify(computerChoice)) { // checks to see if player has won the game by converting player choice and computer choice into a string and seeing if they are exact match. 
       playSubmit() //submit sound effect.
       playApplause() // game winning sound effect.
-      feedBack()
+      //feedBack()
       currentColor = computerChoice[0] // hard coded over bug
       reveal() // function to reveal answer when game is won
       alert('Congrats. You have won in game round ' + gameRound + '. Press the start game button to play again') // alerts player they have won in 'x' gameround. 
@@ -140,9 +139,6 @@ function init() {
       feedBack() // function to calculate the number of pegs for the feedback. 
       updateBoard() // function to sent the game up the grid to the next round. 
     }
-
-    
-  
   }
   sButton.addEventListener('click', submitAnswer) // listens for 'submit' button click. 
 
@@ -150,14 +146,11 @@ function init() {
   // 9) feedback function comparing playerChoice array to computer choice array . . stores white and red pegs in new array feedback(i), that tells the player there feedback. 
   function feedBack() {
     for (let i = 0; i < computerChoice.length; i++) { // looping through playerchoice array 
-      const whitePeg = playerChoice.includes(computerChoice[i])
-      //const whitePeg = computerChoice.includes(playerChoice[i]) // constant created to test wether each guess qualifys for a white peg. We use includes function as this tests if each color exists in computer choice array. 
+      const whitePeg = playerChoice.includes(computerChoice[i]) // constant created to test wether each guess qualifys for a white peg. We use includes function as this tests if each color exists in computer choice array. 
       if (playerChoice[i] === computerChoice[i]) { // test for red peg. 
         feedbackArray.push('red-peg') // push red peg into feedback array
-        //computerChoiceCopy.splice(i, 1, 'x')
       } else if (whitePeg === true && playerChoice[i] !== computerChoice[i]) { // test for white peg. second part tests to make sure its not a red peg so we are not double counting. 
         feedbackArray.push('white-peg') // pushes white peg to array
-        //computerChoiceCopy.splice(i, 1, 'x')
       } else { 
         feedbackArray.push('x-peg') // pushes to no peg array, so that feedback array is always a length of 4. x-peg used to make sure x-peg is last aphabetically (see below)
       } 
@@ -167,7 +160,7 @@ function init() {
       cellArray[width * gameRoundsLeft + 4].childNodes[i].id = feedbackArray[i] // assigns the feedback array into the relevent divs in the feedback cell, through updating thier id. 
     }
   }
-  console.log(playerChoice)
+
 
   // 10) updateboard fucntion. updates the board and takes the game to the next game round by updating counters to move up the grid. 
   function updateBoard(){
@@ -199,16 +192,14 @@ function init() {
   }
 
 
-  //12 ) dupicates mode (mouse hover)
-  const duplicatesLabel = document.querySelector('.label')
+  //12 ) dupicates mode (mouse hover) - to create an alert message to explain duplicates mode, and also change color on duplicates button when mouse is hovered. 
+  const duplicatesLabel = document.querySelector('.label') // defining constants to use below , selecting label and checkbox
   const duplicates = document.querySelector('#checkbox')
-
 
   function handleMouseEnter(event){ // function explains duplicates mode via an alert, when player hovers mouse over checkbox.
     event.target = alert('Selecting duplicates mode allows the computer to use the same color more than once when setting the code. This makes the game harder!')
   }
   duplicates.addEventListener('mouseenter', handleMouseEnter)
-
   
   function labelMouseEnter(event){ // function changes color of 'duplicates' text when hovered over (through an id change). This is to make it clear it is a toggle button between the 2 modes.
     event.target.id = 'label'
@@ -221,10 +212,8 @@ function init() {
   duplicatesLabel.addEventListener('mouseleave', labelMouseLeave)
 
 
-
   //13) Sound effects
   const audio = document.querySelector('#audio')
-  //const button = document.querySelector('#submit')
 
   function playTrumpet(){ // function to play losing sound effect.
     audio.src = 'audio/ES_Trumpet Sad - SFX Producer.mp3'
@@ -242,7 +231,6 @@ function init() {
     audio.src = 'audio/16950_1461335341.mp3'
     audio.play()
   }
-
 }
 
 
