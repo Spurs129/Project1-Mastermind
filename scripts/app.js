@@ -51,7 +51,7 @@ function init() {
 
   // 3) function to randomly generate computer choice array for each game. Can be with or without duplicates dependijng on checkbox.
   function getComputerChoice(){
-    const colorArrayCopy = [...colorArray] // creating a copy array so that we can cchnage the array in the function, without changing the main array (which will be used later). ... prevents mutation. 
+    const colorArrayCopy = [...colorArray] // creating a copy array so that we can chnage the array in the function, without changing the main array (which will be used later). ... prevents mutation. 
     for (let i = 0; i < 4; i++){ 
       const randomIndex = Math.floor(Math.random() * colorArrayCopy.length) // generates a random number for 0 to 7, and assings it to variable
       computerChoice.push(colorArrayCopy[randomIndex]) // pushes a random color into the copy array. 
@@ -62,7 +62,6 @@ function init() {
     }
     for (let i = 0; i < 4; i++){ // foorloop to selected cells 1-4. These hold the computer generated code.
       cellArray[i].value = computerChoice[i] // assigns the value (color) of the cell to corresponding index in the computer array.
-      //cellArray[i].className = computerChoice[i]
       cellArray[i].className = 'hidden' // creates a hidden class, that we use to hide the computer choice during the game (using CSS). Reveal function will reveal code at the end of the game. 
       cellArray[i].innerHTML = '?' // assings the question mark which will be displayed when hidden.
     }
@@ -76,10 +75,10 @@ function init() {
   // 4) create start game function. When start game button  clicked, this resets the board and generates new computer code. 
   const start = document.querySelector('#start')  // query selector selecting the startid (start button)
   function startNewGame(){
+    playStart() // play sound effect
     clearBoard() // function resets the board.
     getComputerChoice() // generates random color combination for the computer code. 
-    console.log(computerChoice)
-    alert(' The aim of this game is to guess the my randonmly generated 4 color code. Choose 4 colors then click submit. You will then receive feedback pegs. A red peg indicates that you guessed the correct color, in the correct column. A white peg indicates a correct color, but in a wrong column. Peg order is randomised. You have 10 attempts. Good luck!') // explain feedback system.
+    alert('The aim of this game is to guess the randonmly generated 4 color code chosen from 8 possible colors. Choose 4 colors and submit your guess. You will then receive feedback pegs. A red peg indicates that you guessed the correct color, in the correct column. A white peg indicates a correct color, but in a wrong column. Peg order is randomised. You have 10 attempts. Good luck!') // explain feedback system.
   }
   start.addEventListener('click', startNewGame) // listens for click on start game button. 
 
@@ -119,43 +118,56 @@ function init() {
   // 8) submit answer function // Listens for click on submit button. This function then submits the players code guess for that gameround, and proccesses appropriate feedback. 
   const sButton = document.querySelector('#submit')
   function submitAnswer(){
-    const blank = playerChoice.some(blank => blank === 'x') //assign variable blank to check if the player has chosen 4 colors. 
+    const blank = playerChoice.some(blank => blank === 'x') //assign variable blank to check if the player has chosen 4 colors.
     if (blank === true) { // if player has not chosen 4 colors, we alert them to chose 4 colors, and exit function. 
       alert('Please select 4 colours')
+      currentColor = 'x' // hard coding to remove bug
     } else if (JSON.stringify(playerChoice) === JSON.stringify(computerChoice)) { // checks to see if player has won the game by converting player choice and computer choice into a string and seeing if they are exact match. 
+      playSubmit() //submit sound effect.
+      playApplause() // game winning sound effect.
+      feedBack()
+      currentColor = computerChoice[0] // hard coded over bug
       reveal() // function to reveal answer when game is won
       alert('Congrats. You have won in game round ' + gameRound + '. Press the start game button to play again') // alerts player they have won in 'x' gameround. 
+    } else if (gameRoundsLeft === 1) { // checks to see if player has used all their permitted guesses. If they have lost, we reveal code, and tell them they are a LOSER!
+      playSubmit()
+      alert('Sorry, you have lost! Press the start game button to start a new game!')
+      reveal()
+      playTrumpet() // trumpet sound to signify losing
+      feedBack()
     } else {
+      playSubmit() // play click sound effect
       feedBack() // function to calculate the number of pegs for the feedback. 
       updateBoard() // function to sent the game up the grid to the next round. 
-      if (gameRoundsLeft === 0){ // checks to see if player has used all their permitted guesses. If they have lost, we reveal code, and tell them they are a LOSER!
-        alert('Sorry, you have lost! Press the start game button to start a new game!')
-        reveal()
-      }
     }
+
+    
+  
   }
   sButton.addEventListener('click', submitAnswer) // listens for 'submit' button click. 
 
 
   // 9) feedback function comparing playerChoice array to computer choice array . . stores white and red pegs in new array feedback(i), that tells the player there feedback. 
-  function feedBack(){
-    
-    for (let i = 0; i < playerChoice.length; i++) { // looping through playerchoice array 
-      const whitePeg = computerChoice.includes(playerChoice[i]) // constant created to test wether each guess qualifys for a white peg. We use includes function as this tests if each color exists in computer choice array. 
+  function feedBack() {
+    for (let i = 0; i < computerChoice.length; i++) { // looping through playerchoice array 
+      const whitePeg = playerChoice.includes(computerChoice[i])
+      //const whitePeg = computerChoice.includes(playerChoice[i]) // constant created to test wether each guess qualifys for a white peg. We use includes function as this tests if each color exists in computer choice array. 
       if (playerChoice[i] === computerChoice[i]) { // test for red peg. 
-        feedbackArray.push('red-peg') // push red peg into feedback array 
+        feedbackArray.push('red-peg') // push red peg into feedback array
+        //computerChoiceCopy.splice(i, 1, 'x')
       } else if (whitePeg === true && playerChoice[i] !== computerChoice[i]) { // test for white peg. second part tests to make sure its not a red peg so we are not double counting. 
         feedbackArray.push('white-peg') // pushes white peg to array
+        //computerChoiceCopy.splice(i, 1, 'x')
       } else { 
         feedbackArray.push('x-peg') // pushes to no peg array, so that feedback array is always a length of 4. x-peg used to make sure x-peg is last aphabetically (see below)
-      }
+      } 
     }
     feedbackArray.sort() // sorts the array into alphabetical order, so that pegs connot be linked to a certain column. This is critical otherwise the game is too easy. red - white -(x)no (pegs order). 
     for ( let i = 0; i < 4; i++) {
       cellArray[width * gameRoundsLeft + 4].childNodes[i].id = feedbackArray[i] // assigns the feedback array into the relevent divs in the feedback cell, through updating thier id. 
     }
   }
-
+  console.log(playerChoice)
 
   // 10) updateboard fucntion. updates the board and takes the game to the next game round by updating counters to move up the grid. 
   function updateBoard(){
@@ -187,15 +199,51 @@ function init() {
   }
 
 
-  //12 ) Info on dupicates mode (mouse hover)
-
+  //12 ) dupicates mode (mouse hover)
+  const duplicatesLabel = document.querySelector('.label')
   const duplicates = document.querySelector('#checkbox')
-  function handleMouseEnter(event){
-    event.target = alert('Selecting duplicates mode allows the code setter to use any color more than once in their code. This makes the game harder')
+
+
+  function handleMouseEnter(event){ // function explains duplicates mode via an alert, when player hovers mouse over checkbox.
+    event.target = alert('Selecting duplicates mode allows the computer to use the same color more than once when setting the code. This makes the game harder!')
   }
   duplicates.addEventListener('mouseenter', handleMouseEnter)
 
+  
+  function labelMouseEnter(event){ // function changes color of 'duplicates' text when hovered over (through an id change). This is to make it clear it is a toggle button between the 2 modes.
+    event.target.id = 'label'
+  }
+  duplicatesLabel.addEventListener('mouseenter', labelMouseEnter)
+
+  function labelMouseLeave(event){ // function returns id to orgional setting when mouse leaves the duplicates button. this alters background color back to black via css . 
+    event.target.id = ''
+  }
+  duplicatesLabel.addEventListener('mouseleave', labelMouseLeave)
+
+
+
+  //13) Sound effects
+  const audio = document.querySelector('#audio')
+  //const button = document.querySelector('#submit')
+
+  function playTrumpet(){ // function to play losing sound effect.
+    audio.src = 'audio/ES_Trumpet Sad - SFX Producer.mp3'
+    audio.play()
+  }
+  function playApplause(){ // function to play winning sound effect
+    audio.src = 'audio/ES_Crowd Applause 8 - SFX Producer.mp3'
+    audio.play()
+  }
+  function playStart(){ // function to play game start sound effect. 
+    audio.src = 'audio/ES_Magical Twinkle 1 - SFX Producer.mp3'
+    audio.play()
+  }
+  function playSubmit(){ // function to play submit button sound effect. 
+    audio.src = 'audio/16950_1461335341.mp3'
+    audio.play()
+  }
 
 }
+
 
 window.addEventListener('DOMContentLoaded', init)
