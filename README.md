@@ -1,16 +1,16 @@
 # Project1-Mastermind
 
-Overview and Brief
+### Overview and Brief
 
 This was a solo project built in 9 days, during week 4 of my General Assembly course. Our brief was to build a game using a grid-system created using JavaScript. I choose to build Mastermind as it is a classic game I enjoyed playing growing up, and still enjoy today.
 
 
-Deployment link
+### Deployment link
 
 https://neilmcfayden.github.io/Project1-Mastermind/
 
 
-Technologies used
+### Technologies used
 
 HTML5
 CSS
@@ -18,7 +18,7 @@ JavaScript
 Visual Studio Code
 
 
-The Game
+ ### The Game
 
 Mastermind is a code breaking game whereby the player has to unlock a colour code consisting of 4 colours in order, chosen from a possible 8 colours. After each guess, the player receives feedback consisting of red and white pegs. A red peg indicates the correct colour in the correct column. A white peg indicates the correct colour, but in the wrong column.
 
@@ -40,7 +40,7 @@ If the game is won, the reveal function is called, and the computer choice row a
 ![alt text](/assets/project1-3.png)
 
 
-Approach taken
+ ### Approach taken
 
 For this project I performed limited planning because as a first project, I didn’t really know what to expect. I made a rough outline of the functions I thought I would need. However by the end of the project, I realised I needed far more than originally planned. 
 
@@ -100,19 +100,19 @@ I added a checkbox to the game that could be turned on and off. Inside of the ra
 When duplicates were not selected, I spliced the colour array to remove the colour already selected, therefore not allowing the random generator to select this colour again. This makes the game slightly easier. 
 
 
-Bugs
+### Bugs
 
 The one main bug I have with this project is occasionally, as the game progresses to a new row, the first cell on the new row is auto filled with the last colour used from the previous row. It only happens occasionally, and I cannot seem to fix it. 
 
 
-Key learnings and wins
+### Key learnings and wins
 
 I was really happy with the outcome given this was my first project. The game has full functionality, and looks appealing and clean. 
 
 It was my first experience of designing and building using JavaScript, and tackling unexpected problems as they emerged. It showed me what is possible in programming and gave me a lot of confidence going into module 2 of my course. 
 
 
-Future Features.
+### Future Features.
 
 It would be interesting to rebuild this game using some of the technologies I have learned since this project. For example I could rebuild this game in React, and make the game much more visually appealing, perhaps with a different theme. 
 
