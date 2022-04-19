@@ -78,7 +78,7 @@ function init() {
     playStart() // play sound effect
     clearBoard() // function resets the board.
     getComputerChoice() // generates random color combination for the computer code. 
-    alert('The aim of this game is to guess the randonmly generated 4 color code chosen from 8 possible colors. Choose 4 colors and submit your guess. You will then receive feedback pegs. A red peg indicates that you guessed the correct color, in the correct column. A white peg indicates a correct color, but in a wrong column. Peg order is randomised. You have 10 attempts. Good luck!') // explain feedback system.
+    alert('The aim of this game is to guess the randomly generated 4 color code chosen from 8 possible colors. Choose 4 colors and submit your guess. You will then receive feedback pegs. A red peg indicates that you guessed the correct color, in the correct column. A white peg indicates a correct color, but in a wrong column. Peg order is randomised. You have 10 attempts. Good luck!') // explain feedback system.
   }
   start.addEventListener('click', startNewGame) // listens for click on start game button. 
 
