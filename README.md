@@ -12,10 +12,7 @@ https://neilmcfayden.github.io/Project1-Mastermind/
 
 ### Technologies used
 
-HTML5
-CSS
-JavaScript
-Visual Studio Code
+HTML5, CSS, JavaScript, Visual Studio Code
 
 
  ### The Game
